@@ -1,0 +1,20 @@
+@import url('href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+
+  --color-primary: #FFF3E3;
+  --color-secondary: #B88E2F;
+  --color-text-300: #333333;
+  --color-card: #F4F5F7;
+  --color-primary-200: #FCF8F3;
+  --color-text-100: #9F9F9F;
+
+  --font-sans: 'Poppins', sans-serif;
+  /*
+  // Optional: To make Poppins the default sans-serif font,
+  // you can override the default --font-sans variable:
+  --font-sans: 'Poppins', sans-serif;
+  */
+}
