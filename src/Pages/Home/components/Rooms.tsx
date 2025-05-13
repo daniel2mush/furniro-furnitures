@@ -25,7 +25,7 @@ const Rooms = () => {
 
   return (
     <div className=" h-[670px] w-full bg-primary flex items-center justify-center px-[131px] gap-4">
-      <div>
+      <div className=" flex flex-col gap-2 items-start px-10">
         <h1 className=" font-bold text-4xl text-text-300 ">
           50+ Beautiful rooms inspiration
         </h1>
@@ -50,7 +50,7 @@ const Rooms = () => {
           className="flex transition-transform duration-700 ease-in-out ">
           {SlideImages.map((src, index) => {
             return (
-              <div>
+              <div key={index}>
                 <div key={index} className="w-[404px] h-[500px] flex-shrink-0">
                   <img
                     src={src}
@@ -65,6 +65,7 @@ const Rooms = () => {
         <div className=" flex justify-start items-center gap-5 mt-5 mx-2">
           {SlideImages.map((src, index) => (
             <div
+              key={index}
               className={`w-5 h-5 rounded-full flex items-center justify-center ${
                 index === ImageIndex ? "ring-secondary ring-1" : " "
               }`}>

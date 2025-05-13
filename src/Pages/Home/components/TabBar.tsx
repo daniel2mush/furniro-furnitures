@@ -13,16 +13,16 @@ const TabBar = () => {
       </div>
       <div>
         <ul className=" flex justify-between items-center gap-5 ">
-          <li className=" cursor-pointer hover:font-bold transition-all  hover:text-text-300">
+          <li className=" cursor-pointer  transition-all hover:scale-110  hover:text-text-300">
             Home
           </li>
-          <li className=" cursor-pointer hover:font-bold transition-all  hover:text-text-300">
+          <li className=" cursor-pointer  transition-all hover:scale-110  hover:text-text-300">
             Shop
           </li>
-          <li className=" cursor-pointer hover:font-bold transition-all  hover:text-text-300">
+          <li className=" cursor-pointer  transition-all hover:scale-110  hover:text-text-300">
             About
           </li>
-          <li className=" cursor-pointer hover:font-bold transition-all  hover:text-text-300">
+          <li className=" cursor-pointer  transition-all hover:scale-110  hover:text-text-300">
             Contact
           </li>
         </ul>
@@ -31,19 +31,19 @@ const TabBar = () => {
       <div className=" flex justify-between items-center gap-5">
         <BiUser
           size={25}
-          className=" cursor-pointer hover:size-8 transition-all duration-200"
+          className=" cursor-pointer hover:scale-125 transition-all duration-200"
         />
         <BiSearch
           size={25}
-          className=" cursor-pointer hover:size-8 transition-all duration-200"
+          className=" cursor-pointer hover:scale-125 transition-all duration-200"
         />
         <BiHeart
           size={25}
-          className=" cursor-pointer hover:size-8 transition-all duration-200"
+          className=" cursor-pointer hover:scale-125 transition-all duration-200"
         />
         <FiShoppingCart
           size={25}
-          className=" cursor-pointer hover:size-8 transition-all duration-200"
+          className=" cursor-pointer hover:scale-125 transition-all duration-200"
         />
       </div>
     </div>

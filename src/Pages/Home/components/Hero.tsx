@@ -1,17 +1,17 @@
 import { getImageUrl } from "../../../Utils/FetchImage";
 const Hero = () => {
   return (
-    <div className=" h-[700px] w-full relative">
-      <div className="  h-full w-full">
+    <div className=" min-h-screen w-full relative">
+      <div className="  h-full w-full ">
         <img
           src={getImageUrl("Hero.png")}
           alt="Hero image"
-          className=" object-cover w-full h-full object-right"
+          className=" object-cover h-screen object-right"
         />
       </div>
-      <div className=" absolute top-[20%] right-10 h-[443px] w-[643px] bg-primary rounded shadow-xl flex flex-col justify-center items-start p-10">
-        <h3 className=" font-semibold text-text-300 mb-2">New Arrival</h3>
-        <h1 className=" font-bold text-7xl text-secondary">
+      <div className="absolute top-1/2 right-10 -translate-y-1/2 h-[443px] w-[50%] bg-primary rounded shadow-xl flex flex-col justify-center items-start p-10">
+        <h3 className="  text-text-300 mb-2 text-3xl">New Arrival</h3>
+        <h1 className=" font-bold text-2xl md:text-5xl sm:text-5xl lg:text-7xl xl:text-7xl text-secondary">
           Discover Our New Collection
         </h1>
         <p className=" text-text-100">

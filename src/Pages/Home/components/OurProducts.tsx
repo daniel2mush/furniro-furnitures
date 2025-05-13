@@ -74,14 +74,14 @@ const OurProducts = () => {
     },
   ];
   return (
-    <div className=" h-[773px] w-full px-[131px] flex items-center justify-center flex-col gap-5 mb-20">
+    <div className="  w-full  flex items-center justify-center  py-10 flex-col gap-5 ">
       <h1 className=" text-2xl font-bold text-text-300 text-center mb-5">
         Our Products
       </h1>
       <section className=" grid grid-cols-4 gap-5">
-        {products.map((product) => {
+        {products.map((product, index) => {
           return (
-            <section className=" relative inline-block group">
+            <section key={index} className=" relative inline-block group">
               <div className=" h-auto bg-card rounded w-full">
                 <div className=" relative">
                   <img
@@ -132,7 +132,7 @@ const OurProducts = () => {
           );
         })}
       </section>
-      <button className=" border cursor-pointer border-secondary rounded px-10 py-2 text-secondary ">
+      <button className=" border cursor-pointer border-secondary rounded px-10 py-2 text-secondary hover:bg-secondary hover:text-white transition-all duration-500 ">
         Show More
       </button>
     </div>

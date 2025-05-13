@@ -1,4 +1,5 @@
 import BrideTheRange from "./components/BrideTheRange";
+import FurniroFuniture from "./components/FurniroFuniture";
 import Hero from "./components/Hero";
 import OurProducts from "./components/OurProducts";
 import Rooms from "./components/Rooms";
@@ -12,6 +13,7 @@ const Home = () => {
       <BrideTheRange />
       <OurProducts />
       <Rooms />
+      <FurniroFuniture />
     </div>
   );
 };
