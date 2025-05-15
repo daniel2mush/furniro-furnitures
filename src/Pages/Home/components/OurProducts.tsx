@@ -78,7 +78,7 @@ const OurProducts = () => {
       <h1 className=" text-2xl font-bold text-text-300 text-center mb-5">
         Our Products
       </h1>
-      <section className=" grid grid-cols-4 gap-5">
+      <section className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-10">
         {products.map((product, index) => {
           return (
             <section key={index} className=" relative inline-block group">

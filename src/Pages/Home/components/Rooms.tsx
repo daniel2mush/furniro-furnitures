@@ -3,11 +3,8 @@ import { getImageUrl } from "../../../Utils/FetchImage";
 import { FaAngleRight } from "react-icons/fa";
 
 const Rooms = () => {
-  const [ImageIndex, setImageIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
 
-  const handleNextImage = () => {
-    setImageIndex((prev) => (prev + 1) % SlideImages.length);
-  };
   const SlideImages: string[] = [
     getImageUrl("Slide1.png"),
     getImageUrl("Slide2.png"),
@@ -15,72 +12,82 @@ const Rooms = () => {
     getImageUrl("Dining.png"),
   ];
 
+  const handleNextImage = () => {
+    setImageIndex((prev) => (prev + 1) % SlideImages.length);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setImageIndex((prev) => (prev + 1) % SlideImages.length);
-    }, 5000); // 5 seconds
-
-    return () => clearInterval(interval); // cleanup on unmount
+    }, 5000);
+    return () => clearInterval(interval);
   }, [SlideImages.length]);
 
   return (
-    <div className=" h-[670px] w-full bg-primary flex items-center justify-center px-10  gap-4">
-      <div className=" flex flex-col gap-2 items-start px-10">
-        <h1 className=" font-bold text-4xl text-text-300 ">
+    <div className="w-full bg-primary px-6 md:px-10 py-10 grid grid-cols-1 md:grid-cols-3 gap-10 items-center h-auto md:h-[670px] xl:px-50 lg:px-20 ">
+      {/* Left Section: Text */}
+      <div className="flex flex-col gap-4 justify-center h-full">
+        <h1 className="font-bold text-4xl text-text-300 xl:text-6xl lg:text-5xl ">
           50+ Beautiful rooms inspiration
         </h1>
-        <p className=" text-text-100">
-          Our designer already made a lot of beautiful prototipe of rooms that
-          inspire you
+        <p className="text-text-100">
+          Our designer already made a lot of beautiful prototypes of rooms that
+          inspire you.
         </p>
-        <button className=" bg-secondary rounded shadow text-white px-5 py-3">
+        <button className="bg-secondary rounded shadow text-white px-5 py-3 w-fit">
           Explore More
         </button>
       </div>
-      <div className=" w-[404px] h-[582px] ">
+
+      {/* Center Section: Static Image */}
+      <div className="w-full max-h-[582px] overflow-hidden">
         <img
           src={getImageUrl("Peace.png")}
           alt="Peace"
-          className=" object-cover w-full h-full"
+          className="w-full h-full object-cover rounded"
         />
       </div>
-      <div className=" w-[404px] h-[582px] overflow-clip  relative group   ">
+
+      {/* Right Section: Slider */}
+      <div className="relative w-full max-h-[582px] overflow-hidden group">
         <div
-          style={{ transform: `translateX(-${ImageIndex * 404}px)` }}
-          className="flex transition-transform duration-700 ease-in-out ">
-          {SlideImages.map((src, index) => {
-            return (
-              <div key={index}>
-                <div key={index} className="w-[404px] h-[500px] flex-shrink-0">
-                  <img
-                    src={src}
-                    alt="Slide"
-                    className={`w-full  object-cover h-full rounded-lg`}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className=" flex justify-start items-center gap-5 mt-5 mx-2">
+          style={{ transform: `translateX(-${imageIndex * 100}%)` }}
+          className="flex transition-transform duration-700 ease-in-out w-full">
           {SlideImages.map((src, index) => (
             <div
               key={index}
+              className="flex-shrink-0 w-full h-[500px] rounded-lg">
+              <img
+                src={src}
+                alt={`Slide ${index}`}
+                className="w-full h-full object-cover rounded-lg"
+              />
+            </div>
+          ))}
+        </div>
+
+        {/* Dots */}
+        <div className="flex justify-start items-center gap-3 mt-5 mx-2">
+          {SlideImages.map((_, index) => (
+            <div
+              key={index}
               className={`w-5 h-5 rounded-full flex items-center justify-center ${
-                index === ImageIndex ? "ring-secondary ring-1" : " "
+                index === imageIndex ? "ring-secondary ring-1" : ""
               }`}>
               <div
-                className={` w-2 h-2  rounded-full ${
-                  index === ImageIndex ? "bg-secondary" : " bg-gray-200 "
+                className={`w-2 h-2 rounded-full ${
+                  index === imageIndex ? "bg-secondary" : "bg-gray-300"
                 }`}
               />
             </div>
           ))}
         </div>
+
+        {/* Next Button */}
         <button
           onClick={handleNextImage}
-          className=" ring-secondary ring-2 text-secondary bg-white flex items-center justify-center w-8 h-8 rounded-full absolute top-48 right-10 hover:bg-secondary hover:text-white  cursor-pointer transition-all duration-500 active:scale-105">
-          <FaAngleRight className=" hover:scale-105 transition-all duration-500" />
+          className="ring-secondary ring-2 text-secondary bg-white flex items-center justify-center w-8 h-8 rounded-full absolute top-1/2 right-4 transform -translate-y-1/2 hover:bg-secondary hover:text-white transition-all duration-300">
+          <FaAngleRight />
         </button>
       </div>
     </div>

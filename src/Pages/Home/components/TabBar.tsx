@@ -71,7 +71,7 @@ const TabBar = () => {
             scrolled ? "bg-white shadow-md" : "bg-white shadow-m"
           }`}>
           {/* Logo */}
-          <img src={logo} alt="Logo" className="w-[160px] object-contain" />
+          <img src={logo} alt="Logo" className="w-[160px] object-cover " />
 
           {/* Navigation Links */}
           <ul className="flex gap-8 text-lg font-medium">
