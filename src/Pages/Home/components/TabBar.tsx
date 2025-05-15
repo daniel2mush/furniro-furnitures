@@ -1,162 +1,154 @@
 import { useState, useEffect } from "react";
-import { BiHeart, BiSearch, BiUser } from "react-icons/bi";
-import logo from "../../../Assets/Logo.png";
-import { FiShoppingCart } from "react-icons/fi";
-import { easeOut, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { BiHeart, BiSearch, BiUser } from "react-icons/bi";
+import { FiShoppingCart } from "react-icons/fi";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import logo from "../../../Assets/Logo.png";
+
+const navLinks = [
+  { name: "Home", location: "/" },
+  { name: "Shop", location: "/shop" },
+  { name: "About", location: "/about" },
+  { name: "Contact", location: "/contact" },
+];
 
 const TabBar = () => {
+  const [isSideBar, setIsSideBar] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
   const [scrolled, setScrolled] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(0);
   const navigate = useNavigate();
-  const [liIndex, setLiIndex] = useState(0);
 
-  // Track scroll position
+  const toggleSideBar = () => setIsSideBar(!isSideBar);
+
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
+    const handleResize = () => setWidth(window.innerWidth);
+    const handleScroll = () => setScrolled(window.scrollY > 50);
 
+    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
-    // Clean up the event listener
     return () => {
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const TabBarVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: { opacity: 1, y: 0 },
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
+  const handleNavigation = (path: string, index: number) => {
+    setActiveIndex(index);
+    navigate(path);
+    setIsSideBar(false); // Close sidebar on mobile
   };
 
-  const TabItemVariants = {
-    hidden: { opacity: 0, x: -30 },
-    visible: { opacity: 1, x: 0 },
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut",
-    },
-  };
-
-  const IconVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1 },
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut",
-    },
-  };
-
-  const handleNavigation = (location: string, index: number) => {
-    setLiIndex(index);
-    navigate(location);
-  };
-
-  interface LiNavTextType {
-    name: string;
-    location: string;
-  }
-
-  const LiNavText: LiNavTextType[] = [
-    {
-      name: "Home",
-      location: "/",
-    },
-    {
-      name: "Shop",
-      location: "/shop",
-    },
-    {
-      name: "About",
-      location: "/about",
-    },
-    {
-      name: "Contact",
-      location: "/contact",
-    },
-  ];
+  const renderIcons = () => (
+    <div className="flex gap-5 items-center">
+      <BiUser size={24} className="cursor-pointer hover:scale-110 transition" />
+      <BiSearch
+        size={24}
+        className="cursor-pointer hover:scale-110 transition"
+      />
+      <BiHeart
+        size={24}
+        className="cursor-pointer hover:scale-110 transition"
+      />
+      <FiShoppingCart
+        size={24}
+        className="cursor-pointer hover:scale-110 transition"
+      />
+    </div>
+  );
 
   return (
-    <motion.div
-      variants={TabBarVariants}
-      initial="hidden"
-      animate="visible"
-      className={`w-full h-[100px] py-15 px-15 flex justify-between items-center fixed top-0 left-0 z-50 transition-all ${
-        scrolled ? "bg-white shadow-md" : "bg-transparent"
-      }`}>
-      <motion.div variants={TabItemVariants} className="w-[185px]">
-        <a href="#">
-          <img src={logo} alt="Logo here" className="w-full object-contain" />
-        </a>
-      </motion.div>
+    <section>
+      {/* Desktop Nav */}
+      {width > 768 && (
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className={`fixed top-0 left-0 w-full h-[100px] px-10 flex justify-between items-center z-50 transition-all ${
+            scrolled ? "bg-white shadow-md" : "bg-white shadow-m"
+          }`}>
+          {/* Logo */}
+          <img src={logo} alt="Logo" className="w-[160px] object-contain" />
 
-      <motion.div
-        className="flex justify-between items-center gap-5"
-        initial="hidden"
-        animate="visible"
-        variants={TabItemVariants}
-        transition={{ delayChildren: 0.2, staggerChildren: 0.3 }}>
-        <ul className="flex justify-between items-center gap-5">
-          {LiNavText.map((items, index) => (
-            <div>
-              <motion.li
-                onClick={() => handleNavigation(items.location, index)}
-                className="cursor-pointer transition-all hover:scale-110 hover:text-text-300"
-                variants={TabItemVariants}>
-                {items.name}
-              </motion.li>
-              {liIndex === index && (
-                <motion.div
-                  variants={{
-                    scale: {
-                      scaleX: 0,
-                      originX: 0,
-                    },
-                    normal: {
-                      scaleX: 1,
-                      originX: 0,
-                    },
-                  }}
-                  initial="scale"
-                  animate="normal"
-                  transition={{ duration: 0.5, ease: easeOut }}
-                  className=" bg-secondary w-full h-1 rounded"
-                />
-              )}
-            </div>
-          ))}
-        </ul>
-      </motion.div>
+          {/* Navigation Links */}
+          <ul className="flex gap-8 text-lg font-medium">
+            {navLinks.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleNavigation(item.location, index)}
+                className={`cursor-pointer hover:text-text-300 transition relative ${
+                  activeIndex === index ? "text-text-300" : ""
+                }`}>
+                {item.name}
+                {activeIndex === index && (
+                  <motion.div
+                    layoutId="underline"
+                    className="absolute left-0 -bottom-2 w-full h-1 bg-secondary rounded"
+                  />
+                )}
+              </li>
+            ))}
+          </ul>
 
-      <motion.div
-        variants={IconVariants}
-        className="flex justify-between items-center gap-5">
-        <BiUser
-          size={25}
-          className="cursor-pointer hover:scale-125 transition-all duration-200"
-        />
-        <BiSearch
-          size={25}
-          className="cursor-pointer hover:scale-125 transition-all duration-200"
-        />
-        <BiHeart
-          size={25}
-          className="cursor-pointer hover:scale-125 transition-all duration-200"
-        />
-        <FiShoppingCart
-          size={25}
-          className="cursor-pointer hover:scale-125 transition-all duration-200"
-        />
-      </motion.div>
-    </motion.div>
+          {/* Icons */}
+          {renderIcons()}
+        </motion.div>
+      )}
+
+      {/* Mobile Menu Button */}
+      {width <= 768 && (
+        <button
+          onClick={toggleSideBar}
+          className="fixed top-5 left-5 z-50 p-2 bg-white shadow-md rounded-full">
+          {isSideBar ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      )}
+
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {isSideBar && width <= 768 && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 bg-black z-40"
+              onClick={toggleSideBar}
+            />
+
+            {/* Sidebar */}
+            <motion.div
+              initial={{ x: -300 }}
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{ duration: 0.3 }}
+              className="fixed top-0 left-0 w-[30%] h-full bg-white z-50 shadow-lg p-6 flex flex-col">
+              <div className="flex justify-between items-center mb-8">
+                <img src={logo} alt="Logo" className="w-[120px]" />
+                <X onClick={toggleSideBar} className="cursor-pointer" />
+              </div>
+
+              <ul className="flex flex-col gap-6 text-lg font-medium">
+                {navLinks.map((item, index) => (
+                  <li
+                    key={index}
+                    onClick={() => handleNavigation(item.location, index)}
+                    className="cursor-pointer hover:text-primary transition">
+                    {item.name}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-auto pt-10">{renderIcons()}</div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </section>
   );
 };
 

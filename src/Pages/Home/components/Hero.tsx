@@ -2,67 +2,70 @@ import { motion } from "framer-motion";
 import { getImageUrl } from "../../../Utils/FetchImage";
 
 const Hero = () => {
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 1.1 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
   };
 
-  const contentVariants = {
+  const fadeInUp = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.4 } },
-  };
-
-  const headingVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.6 } },
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay: 0.8 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
   };
 
   return (
-    <div className="min-h-screen w-full relative">
+    <section className="relative min-h-screen w-full overflow-hidden flex justify-center items-center">
+      {/* Background image */}
       <motion.div
-        variants={imageVariants}
-        initial="hidden"
-        animate="visible"
-        className="h-full w-full">
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="absolute inset-0 z-0">
         <img
           src={getImageUrl("Hero.png")}
-          alt="Hero image"
-          className="object-cover h-screen object-right"
+          alt="Hero"
+          className="w-full h-full object-cover"
         />
+        <div className="absolute inset-0 bg-black/70" />
       </motion.div>
 
+      {/* Content container */}
       <motion.div
-        variants={contentVariants}
+        variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="absolute top-1/2 right-10 -translate-y-1/2 h-[443px] w-[50%] bg-primary rounded shadow-xl flex flex-col justify-center items-start p-10">
+        className="relative z-10 w-full px-6 md:px-20 max-w-5xl text-white text-center flex flex-col items-center justify-center min-h-screen">
         <motion.h3
-          variants={headingVariants}
-          className="text-text-300 mb-2 text-3xl">
+          variants={fadeInUp}
+          className="text-lg md:text-3xl text-secondary mb-2">
           New Arrival
         </motion.h3>
+
         <motion.h1
-          variants={headingVariants}
-          className="font-bold text-2xl md:text-5xl sm:text-5xl lg:text-7xl xl:text-7xl text-secondary">
+          variants={fadeInUp}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold leading-tight max-w-6xl">
           Discover Our New Collection
         </motion.h1>
-        <motion.p variants={contentVariants} className="text-text-100">
+
+        <motion.p
+          variants={fadeInUp}
+          className="text-base md:text-lg text-gray-200 max-w-2xl mt-4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla hic
           deleniti ratione dignissimos tempora facilis repellat a modi
           perferendis iusto.
         </motion.p>
+
         <motion.button
-          variants={buttonVariants}
-          className="px-5 py-3 w-40 bg-secondary mt-4 text-white rounded shadow cursor-pointer hover:bg-secondary/80 active:bg-secondary/70">
-          Buy
+          variants={fadeInUp}
+          className="mt-6 px-6 py-3 bg-secondary text-white rounded shadow hover:bg-secondary/80 active:bg-secondary/70 w-fit">
+          Buy Now
         </motion.button>
       </motion.div>
-    </div>
+    </section>
   );
 };
 
