@@ -75,7 +75,7 @@ const OurProducts = () => {
   ];
   return (
     <div className="  w-full  flex items-center justify-center  py-10 flex-col gap-5 ">
-      <h1 className=" text-2xl font-bold text-text-300 text-center mb-5">
+      <h1 className=" text-2xl md:text-4xl font-bold text-text-300 text-center mb-5">
         Our Products
       </h1>
       <section className=" grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-10">

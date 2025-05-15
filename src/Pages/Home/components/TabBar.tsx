@@ -60,7 +60,7 @@ const TabBar = () => {
   );
 
   return (
-    <section>
+    <header>
       {/* Desktop Nav */}
       {width > 768 && (
         <motion.div
@@ -126,7 +126,7 @@ const TabBar = () => {
               animate={{ x: 0 }}
               exit={{ x: -300 }}
               transition={{ duration: 0.3 }}
-              className="fixed top-0 left-0 w-[30%] h-full bg-white z-50 shadow-lg p-6 flex flex-col">
+              className="fixed top-0 left-0 w-[50%] h-full bg-white z-50 shadow-lg p-6 flex flex-col">
               <div className="flex justify-between items-center mb-8">
                 <img src={logo} alt="Logo" className="w-[120px]" />
                 <X onClick={toggleSideBar} className="cursor-pointer" />
@@ -148,7 +148,7 @@ const TabBar = () => {
           </>
         )}
       </AnimatePresence>
-    </section>
+    </header>
   );
 };
 

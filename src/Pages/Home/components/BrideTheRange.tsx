@@ -25,7 +25,7 @@ const BrideTheRange = () => {
     <div className=" w-full py-10   ">
       <div className=" flex items-center flex-col ">
         <div className=" mx-10">
-          <h1 className=" font-bold text-2xl text-text-300 ">
+          <h1 className=" font-bold text-2xl text-center md:text-4xl text-text-300 ">
             Bridge The range
           </h1>
           <p className=" text-text-100 ">
