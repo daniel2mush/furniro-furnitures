@@ -59,7 +59,7 @@ const FurniroFuniture = () => {
   const [selectedImage, setSelectedImage] = useState<ImageData | null>(null);
 
   return (
-    <div className="h-[780px] w-full px-20 py-20 relative">
+    <div className=" w-full px-20  py-20  relative">
       <div>
         <h1 className="text-text-100 text-center text-2xl">
           Share your setup with

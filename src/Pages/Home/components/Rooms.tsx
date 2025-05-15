@@ -24,7 +24,7 @@ const Rooms = () => {
   }, [SlideImages.length]);
 
   return (
-    <div className=" h-[670px] w-full bg-primary flex items-center justify-center px-[131px] gap-4">
+    <div className=" h-[670px] w-full bg-primary flex items-center justify-center px-10  gap-4">
       <div className=" flex flex-col gap-2 items-start px-10">
         <h1 className=" font-bold text-4xl text-text-300 ">
           50+ Beautiful rooms inspiration
