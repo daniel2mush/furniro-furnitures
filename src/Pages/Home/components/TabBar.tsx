@@ -68,7 +68,7 @@ const TabBar = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className={`fixed top-0 left-0 w-full h-[100px] px-10 flex justify-between items-center z-50 transition-all ${
-            scrolled ? "bg-white shadow-md" : "bg-white shadow-m"
+            scrolled ? "bg-white shadow-md" : "bg-white "
           }`}>
           {/* Logo */}
           <img src={logo} alt="Logo" className="w-[160px] object-cover " />
